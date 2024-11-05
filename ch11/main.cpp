@@ -198,7 +198,6 @@ int main()
 
 
 #ifdef _11_7__Template_argument_deduction
-#endif // _11_7__Template_argument_deduction
 #include <iostream>
 template<typename T>
 T max(T x, T y)
@@ -213,9 +212,149 @@ int max(int x, int y)
 	return (x < y) ? y : x;
 }
 
+//
+template <typename T>
+void print(T x)
+{
+	std::cout << x; //
+}
+
+//
+//
+void print(bool x)
+{
+	std::cout << std::boolalpha << x; //
+}
+
+
+
+
 int main()
 {
 	std::cout << max<int>(1, 2) << '\n'; // calls max<int>(int, int)
 	std::cout << max<>(1, 2) << '\n'; // deduces max<int>(int, int) (non-template functions not considered)
 	std::cout << max(1, 2) << '\n';
+
+
+	print<bool>(true); //
+	std::cout << '\n';
+
+	print<>(true); //
+	std::cout << '\n';
+
+	print(true); //
+	std::cout << '\n';
+
+	return 0;
 }
+#endif // _11_7__Template_argument_deduction
+
+
+
+#ifdef _11_7__Function_templates_with__non_template_parameters
+template <typename T>
+int someFcn(T, double)
+{
+	return 5;
+}
+
+int main()
+{
+	someFcn(1, 3.4);
+	someFcn(1, 3.4f);
+	someFcn(1.2, 3.4);
+	someFcn(1.2f, 3.4);
+	someFcn(1.2f, 3.4f);
+
+	return 5;
+}
+#endif // 11_7__
+
+
+
+#ifdef _11_7__Instantiated_functions_may_not
+#include <iostream>
+#include <string>
+
+template <typename T>
+T addOne(T x)
+{
+    return x + 1;
+}
+
+// Use function template specialization to tell the compiler that addOne(const char*) should emit a compilation error
+// const char* will match a string literal
+template <>
+const char* addOne(const char* x) = delete;
+
+int main()
+{
+    std::cout << addOne("Hello, world!") << '\n'; // compile error
+
+    return 0;
+}
+#endif // _11_7__
+
+
+#ifdef _11_7__Function_templates_and_default_arguments_for_non_template_parameters
+#include <iostream>
+
+template <typename T>
+void print(T val, int times=1)
+{
+	while (times--)
+	{
+		std::cout << val;
+	}
+}
+
+int main()
+{
+	print(5);
+	print('a', 3);
+
+	return 0;
+}
+#endif // _11_7__
+
+
+
+#ifdef c_strings
+//Магистерский курс C++ (МФТИ, 2022-2023). Лекция 1. Строки.
+//https://www.youtube.com/watch?v=9N_wJ7oIHDk
+#include <iostream>
+int main()
+{
+	std::cout << R"(H
+	e
+	l
+	l
+	o)" << std::endl;
+}
+#endif // c_strings
+
+
+
+#ifdef _11_7__Beware_function_templates_with_modifiable_static_local_variables
+#include <iostream>
+
+// Here's a function template with a static local variable that is modified
+template <typename T>
+void printIDAndValue(T value)
+{
+	static int id{};
+	std::cout << ++id << ") " << value << '\n';
+}
+
+int main()
+{
+	printIDAndValue(12);
+	printIDAndValue(13);
+
+	printIDAndValue(14.5);
+	printIDAndValue(14.5);
+	printIDAndValue(14.5);
+
+	return 0;
+}
+#endif // _11_7__Beware_function_templates_with_modifiable_static_local_variables
