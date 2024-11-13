@@ -62,7 +62,6 @@ int main()
 
 
 #ifdef Question_2
-#endif // Question_2
 //Make sure that assert triggers even if we compile in release mode
 #undef NDEBUG
 
@@ -158,6 +157,80 @@ int main()
 	assert(isPrime(13417));
 
 	std::cout << "Success!\n";
+
+	return 0;
+}
+#endif // Question_2
+
+
+
+#ifdef Question_3
+#endif // Question_3
+#include <iostream>
+#include "Random.h" // https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/
+
+// returns true if the user won, false if they lost
+bool playHiLo(int guesses, int min, int max)
+{
+	std::cout << "Let's play a game. I'm thinking of a number between "  
+	<< min << " and " << max 
+	<< ". You have " << guesses << " tries to guess what it is.\n";
+	int number{Random::get(min, max)}; // this is the number the user needs to guess
+
+	// Loop through all of the guesses
+	for (int count{1}; count <= guesses; ++count)
+	{
+		std::cout << "Guess #" << count << ": ";
+
+		int guess{};
+		std::cin >> guess;
+
+		if (guess > number)
+			std::cout << "Your guess is too high.\n";
+		else if (guess < number)
+			std::cout << "Your guess is too low.\n";
+		else // guess == number, so the user won
+		{
+			std::cout << "Correct! You win!\n";
+			return true;
+		}
+	}
+
+	// The user lost
+	std::cout << "Sorry, you lose. The correct number was " << number << '\n';
+	return false;
+}
+
+bool playAgain()
+{
+	// Keep asking the user if they want to play again until they pick y or n.
+	while (true)
+	{
+		char ch{};
+		std::cout << "Would you like to play again (y/n)? ";
+		std::cin >> ch;
+
+		switch(ch)
+		{
+		case 'y': return true;
+		case 'n': return false;
+		}
+	}
+}
+
+
+int main()
+{
+	constexpr int guesses{7}; // the user has this many	guesses
+	constexpr int min {1};
+	constexpr int max {100};
+
+	do
+	{
+		playHiLo(guesses, min, max);
+	} while (playAgain());
+
+	std::cout << "Thank you for palying.\n";
 
 	return 0;
 }
