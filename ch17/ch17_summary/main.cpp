@@ -165,7 +165,6 @@ int main()
 
 
 #ifdef Question3
-#endif // Question3
 #include <algorithm>
 #include <array>
 #include <cassert>
@@ -365,6 +364,14 @@ int main()
 
 	return 0;
 }
+
+#endif // Question3
+
+
+
+// https://www.learncpp.com/cpp-tutorial/chapter-17-summary-and-quiz/
+#ifdef Question5
+#endif // Question5
 
 
 
