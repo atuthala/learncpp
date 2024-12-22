@@ -224,4 +224,7 @@ int main()
 	// Now print our sorted array as proof it works
 	printarr(array, length);
 
+	std::string entry{};
+	std::cin >> entry;
+
 }
