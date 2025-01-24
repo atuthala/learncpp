@@ -33,3 +33,8 @@ https://askubuntu.com/questions/1451704/how-to-install-mingw-w64-x86-64-gtk3-in-
 ### cd ~/temp28/quasi-msys2/env/shell.sh
 
 win-clang++ hello_world.cpp `pkg-config --cflags --libs gtk4`
+
+
+## Для запуска в режиме RELEASE
+
+g++ -std=c++20 -O main.cpp
