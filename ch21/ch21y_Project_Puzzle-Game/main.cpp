@@ -308,7 +308,8 @@ int main()
         // Handle non-direction commands
         if (ch == 'q')
         {
-            std::cout << "\n\nBye!\n\n";
+            std::cout << "\n\nBye! 2\n\n";
+            std::getchar();
             return 0;
         }
 
