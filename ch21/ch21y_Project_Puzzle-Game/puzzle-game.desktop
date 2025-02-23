@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Exec=x-terminal-emulator -e /bin/bash -c '/usr/bin/puzzle-game ; echo "" ; echo "Press Enter to close....." ; read'
+Name=PuzzleGame15
+Icon=/home/jon28/PROJ28v2/learncpp/ch21/ch21y_Project_Puzzle-Game/cat.png
+Categories=Utility
